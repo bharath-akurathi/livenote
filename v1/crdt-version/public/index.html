@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Docs Clone — CRDT (Yjs)</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <svg class="doc-icon" viewBox="0 0 24 24" width="26" height="26">
+        <path fill="#F4A835" d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
+        <path fill="#fff" d="M14 2v6h6z"/>
+      </svg>
+      <input id="doc-title" class="doc-title" value="Untitled document" />
+    </div>
+    <div class="topbar-right">
+      <span id="status" class="status disconnected">● Connecting…</span>
+      <div id="users" class="users"></div>
+    </div>
+  </header>
+
+  <div class="meta-bar">
+    Document: <code id="doc-id-label"></code> — open in another tab to test syncing
+    · <strong>CRDT (Yjs)</strong> implementation (port 3004)
+  </div>
+
+  <!-- CRDT-specific: live Y.Doc stats. These numbers don't exist in the other versions. -->
+  <div class="crdt-stats">
+    <div class="stat">
+      <span class="stat-label">CRDT ops in doc</span>
+      <span class="stat-value" id="crdt-ops">0</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Encoded size</span>
+      <span class="stat-value" id="crdt-bytes">0B</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Peers (awareness)</span>
+      <span class="stat-value" id="crdt-peers">1</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Client ID</span>
+      <span class="stat-value" id="crdt-client-id" style="font-size:0.7rem">—</span>
+    </div>
+  </div>
+
+  <main class="page-wrap">
+    <textarea id="editor" class="page" spellcheck="false" placeholder="Start typing… try opening this same URL in two tabs and editing the same word simultaneously. Unlike the other versions, BOTH edits will survive."></textarea>
+  </main>
+
+  <!--
+    Import map: tells the browser how to resolve bare specifiers like 'yjs'
+    and 'y-websocket' without a bundler. esm.sh resolves transitive deps automatically.
+    This is the same thing a bundler (Vite/webpack) would do at build time.
+  -->
+  <script type="importmap">
+  {
+    "imports": {
+      "yjs":          "https://esm.sh/yjs@13.6.20",
+      "y-websocket":  "https://esm.sh/y-websocket@1.5.4"
+    }
+  }
+  </script>
+  <script type="module" src="client.js"></script>
+</body>
+</html>

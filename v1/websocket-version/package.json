@@ -1,0 +1,13 @@
+{
+  "name": "gdocs-clone-websocket",
+  "version": "1.0.0",
+  "description": "Collaborative document editor MVP built with raw WebSockets (ws)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.18.0"
+  }
+}

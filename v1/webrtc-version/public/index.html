@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Docs Clone — WebRTC</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <svg class="doc-icon" viewBox="0 0 24 24" width="26" height="26">
+        <path fill="#4285F4" d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
+        <path fill="#fff" d="M14 2v6h6z"/>
+      </svg>
+      <input id="doc-title" class="doc-title" value="Untitled document" />
+    </div>
+    <div class="topbar-right">
+      <span id="status" class="status disconnected">● Connecting…</span>
+      <div id="users" class="users"></div>
+    </div>
+  </header>
+
+  <div class="meta-bar">
+    Document: <code id="doc-id-label"></code> — open this same URL in another tab to test syncing · <strong>WebRTC</strong> peer-to-peer (signaling on port 3003)
+  </div>
+  <div id="links" class="links-bar">No other peers yet</div>
+
+  <main class="page-wrap">
+    <textarea id="editor" class="page" spellcheck="false" placeholder="Start typing…"></textarea>
+  </main>
+
+  <script src="client.js"></script>
+</body>
+</html>
