@@ -1,0 +1,33 @@
+{
+  "name": "livenote",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "start": "npm start --workspace=@livenote/server",
+    "test": "npm run test --workspaces"
+  },
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">   📝 LiveNote </h1>",
+  "main": "index.js",
+  "dependencies": {
+    "undici-types": "^8.3.0",
+    "ws": "^8.21.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bharath-akurathi/livenote.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/bharath-akurathi/livenote/issues"
+  },
+  "homepage": "https://github.com/bharath-akurathi/livenote#readme"
+}
