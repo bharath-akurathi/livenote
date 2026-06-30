@@ -90,7 +90,7 @@ async function main() {
     app.use(express.static(clientDistPath));
     
     // Any other request (not API) serves index.html for client-side routing
-    app.get('*', (req, res) => {
+    app.use((req, res) => {
       res.sendFile(path.join(clientDistPath, 'index.html'));
     });
   } else {
