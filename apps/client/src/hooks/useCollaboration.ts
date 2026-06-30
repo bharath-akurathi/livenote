@@ -15,7 +15,11 @@ import { IndexeddbPersistence } from 'y-indexeddb';
 import { getAccessToken } from '../lib/api';
 import type { AwarenessUser } from '../types';
 
-const COLLAB_URL = import.meta.env.VITE_COLLAB_URL || 'ws://localhost:3000/collaboration';
+const defaultUrl = import.meta.env.PROD 
+  ? `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/collaboration`
+  : 'ws://localhost:3000/collaboration';
+
+const COLLAB_URL = import.meta.env.VITE_COLLAB_URL || defaultUrl;
 
 // Palette of accessible colors for user cursors
 
