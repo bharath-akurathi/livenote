@@ -18,6 +18,12 @@
 
 ---
 
+## Live demo
+
+https://drive.google.com/file/d/1_FDz-8-TCxXdwSYIQWxq8qMRF2t6o57O/view
+
+---
+
 ## ✨ What is LiveNote?
 
 LiveNote is a full-stack collaborative document editor that lets multiple users write, edit, and comment on documents simultaneously — with no conflicts, no data loss, and seamless offline support.
