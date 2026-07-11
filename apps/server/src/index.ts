@@ -45,7 +45,27 @@ async function main() {
   });
 
   // Security headers
-  app.use(helmet());
+
+  // app.use(helmet());
+
+  app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        // Allow WebSockets and standard connections
+        connectSrc: ["'self'", "wss:", "ws:", "https:"],
+        // Allow Vite/React inline styles and scripts
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        // Allow external images
+        imgSrc: ["'self'", "data:", "https:"],
+        // THIS IS THE FIX: Allow YouTube in iframes
+        frameSrc: ["'self'", "https://www.youtube.com"], 
+      },
+    },
+    // Disable COEP so it doesn't block cross-origin resources like YouTube
+    crossOriginEmbedderPolicy: false,
+  }));
 
   // CORS — whitelist only
   app.use(cors({
