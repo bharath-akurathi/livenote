@@ -26,6 +26,17 @@ function getColor(name: string): string {
   return COLORS[Math.abs(hash) % COLORS.length];
 }
 
+/** Pick black/white text for legibility on an arbitrary hex background. */
+function getContrastColor(hex: string): string {
+  const h = hex.replace('#', '');
+  const full = h.length === 3 ? h.split('').map((c) => c + c).join('') : h;
+  const r = parseInt(full.slice(0, 2), 16);
+  const g = parseInt(full.slice(2, 4), 16);
+  const b = parseInt(full.slice(4, 6), 16);
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.6 ? '#0f172a' : '#ffffff';
+}
+
 export function Avatar({ name, color, size = 'md', className }: AvatarProps) {
   const initials = name
     .split(' ')
@@ -37,12 +48,12 @@ export function Avatar({ name, color, size = 'md', className }: AvatarProps) {
   return (
     <div
       className={clsx(
-        'rounded-full flex items-center justify-center font-bold text-white flex-shrink-0',
+        'rounded-full flex items-center justify-center font-bold flex-shrink-0',
         sizes[size],
         color ? '' : getColor(name),
         className
       )}
-      style={color ? { backgroundColor: color } : undefined}
+      style={color ? { backgroundColor: color, color: getContrastColor(color) } : undefined}
       title={name}
     >
       {initials}

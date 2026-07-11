@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
 import { useUIStore } from '../stores/uiStore';
+import { ThemeToggle } from '../components/ThemeToggle';
 import { useCollaboration } from '../hooks/useCollaboration';
 import { docs } from '../lib/api';
 import { CollabEditor } from '../components/Editor/CollabEditor';
@@ -99,15 +100,15 @@ export function DocumentPage() {
   const isReadOnly = doc.role === 'viewer';
 
   return (
-    <div className="h-screen bg-white flex flex-col overflow-hidden">
+    <div className="h-screen bg-canvas flex flex-col overflow-hidden">
       {/* Top bar */}
-      <header className="border-b border-gray-200 bg-white z-30 flex-shrink-0">
+      <header className="border-b border-line bg-surface z-30 flex-shrink-0">
         <div className="flex items-center justify-between px-4 h-14">
           {/* Left */}
           <div className="flex items-center gap-3 min-w-0 flex-1">
             <button
               onClick={() => navigate('/dashboard')}
-              className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors flex-shrink-0"
+              className="p-2 rounded-lg text-ink-subtle hover:text-ink hover:bg-surface-muted transition-colors flex-shrink-0"
               title="Back to dashboard"
               id="back-btn"
             >
@@ -117,7 +118,7 @@ export function DocumentPage() {
               value={title}
               onChange={handleTitleChange}
               disabled={isReadOnly}
-              className="text-lg font-semibold text-gray-900 bg-transparent border-none outline-none min-w-0 flex-1 hover:bg-gray-50 focus:bg-gray-50 px-2 py-1 rounded-lg transition-colors"
+              className="text-lg font-semibold text-ink bg-transparent border-none outline-none min-w-0 flex-1 hover:bg-surface-muted focus:bg-surface-muted px-2 py-1 rounded-lg transition-colors"
               placeholder="Untitled document"
               id="doc-title-input"
             />
@@ -125,6 +126,7 @@ export function DocumentPage() {
 
           {/* Right */}
           <div className="flex items-center gap-2 flex-shrink-0">
+            <ThemeToggle />
             {/* Connection status */}
             <div className="flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium">
               {collab.connected ? (
@@ -149,10 +151,10 @@ export function DocumentPage() {
               title="Toggle presence sidebar"
             >
               {Array.from(collab.awarenessUsers.values()).slice(0, 4).map((u, i) => (
-                <Avatar key={i} name={u.name} color={u.color} size="sm" className="ring-2 ring-white" />
+                <Avatar key={i} name={u.name} color={u.color} size="sm" className="ring-2 ring-surface" />
               ))}
               {collab.awarenessUsers.size > 4 && (
-                <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-[10px] font-bold text-gray-600 ring-2 ring-white">
+                <div className="w-6 h-6 rounded-full bg-surface-strong flex items-center justify-center text-[10px] font-bold text-ink-muted ring-2 ring-surface">
                   +{collab.awarenessUsers.size - 4}
                 </div>
               )}
@@ -203,7 +205,7 @@ export function DocumentPage() {
             <div className="flex items-center justify-center py-20">
               <div className="text-center">
                 <Spinner size="lg" className="mx-auto mb-4" />
-                <p className="text-gray-500 text-sm">Connecting to collaboration server…</p>
+                <p className="text-ink-muted text-sm">Connecting to collaboration server…</p>
               </div>
             </div>
           )}

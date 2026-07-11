@@ -144,8 +144,8 @@ export function SlashCommandMenu({ editor }: Props) {
             {cmd.icon}
           </div>
           <div>
-            <p className="font-medium text-gray-900 text-sm">{cmd.title}</p>
-            <p className="text-gray-500 text-xs">{cmd.description}</p>
+            <p className="font-medium text-gray-900 text-sm dark:text-ink">{cmd.title}</p>
+            <p className="text-gray-500 text-xs dark:text-ink-muted">{cmd.description}</p>
           </div>
         </div>
       ))}

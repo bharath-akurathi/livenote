@@ -114,30 +114,30 @@ export function CommentsPanel({ documentId, onClose }: CommentsProps) {
       initialWidth={320} 
       minWidth={250} 
       maxWidth={500}
-      className="border-l border-gray-200 bg-gray-50 h-full animate-slide-in-right"
+      className="border-l border-line bg-surface h-full animate-slide-in-right"
       side="left"
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white">
-        <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-line bg-surface">
+        <h3 className="text-sm font-semibold text-ink flex items-center gap-2">
           <MessageSquare size={16} />
           Comments
           {allComments.length > 0 && (
-            <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-full">
+            <span className="text-xs bg-surface-strong text-ink-muted px-1.5 py-0.5 rounded-full">
               {allComments.length}
             </span>
           )}
         </h3>
         <button
           onClick={onClose}
-          className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+          className="p-1 rounded-lg text-ink-subtle hover:text-ink hover:bg-surface-muted transition-colors"
         >
           <X size={16} />
         </button>
       </div>
 
       {/* Filter tabs */}
-      <div className="flex border-b border-gray-200 bg-white px-4">
+      <div className="flex border-b border-line bg-surface px-4">
         {(['all', 'open', 'resolved'] as const).map((f) => (
           <button
             key={f}
@@ -145,7 +145,7 @@ export function CommentsPanel({ documentId, onClose }: CommentsProps) {
             className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors capitalize ${
               filter === f
                 ? 'border-brand-500 text-brand-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
+                : 'border-transparent text-ink-muted hover:text-ink'
             }`}
           >
             {f}
@@ -161,8 +161,8 @@ export function CommentsPanel({ documentId, onClose }: CommentsProps) {
           </div>
         ) : filteredRoots.length === 0 ? (
           <div className="text-center py-8">
-            <MessageSquare size={24} className="mx-auto text-gray-300 mb-2" />
-            <p className="text-sm text-gray-500">
+            <MessageSquare size={24} className="mx-auto text-ink-subtle mb-2" />
+            <p className="text-sm text-ink-muted">
               {filter === 'all' ? 'No comments yet' : `No ${filter} comments`}
             </p>
           </div>
@@ -170,10 +170,10 @@ export function CommentsPanel({ documentId, onClose }: CommentsProps) {
           filteredRoots.map((comment) => (
             <div
               key={comment.id}
-              className={`bg-white rounded-lg border p-3 transition-colors ${
+              className={`bg-surface-muted rounded-lg border p-3 transition-colors ${
                 comment.resolved
-                  ? 'border-gray-100 opacity-70'
-                  : 'border-gray-200'
+                  ? 'border-line opacity-70'
+                  : 'border-line'
               }`}
             >
               {/* Comment header */}
@@ -181,8 +181,8 @@ export function CommentsPanel({ documentId, onClose }: CommentsProps) {
                 <div className="flex items-center gap-2">
                   <Avatar name={comment.user_name} size="sm" />
                   <div>
-                    <p className="text-sm font-medium text-gray-900">{comment.user_name}</p>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-sm font-medium text-ink">{comment.user_name}</p>
+                    <p className="text-xs text-ink-subtle">
                       {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
                     </p>
                   </div>
@@ -193,8 +193,8 @@ export function CommentsPanel({ documentId, onClose }: CommentsProps) {
                     onClick={() => handleToggleResolve(comment)}
                     className={`p-1 rounded transition-colors ${
                       comment.resolved
-                        ? 'text-emerald-500 hover:bg-emerald-50'
-                        : 'text-gray-400 hover:text-emerald-500 hover:bg-emerald-50'
+                        ? 'text-emerald-500 hover:bg-emerald-500/10'
+                        : 'text-ink-subtle hover:text-emerald-500 hover:bg-emerald-500/10'
                     }`}
                     title={comment.resolved ? 'Reopen' : 'Resolve'}
                   >
@@ -204,7 +204,7 @@ export function CommentsPanel({ documentId, onClose }: CommentsProps) {
                   {comment.user_id === user?.id && (
                     <button
                       onClick={() => handleDelete(comment.id)}
-                      className="p-1 rounded text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+                      className="p-1 rounded text-ink-subtle hover:text-red-500 hover:bg-red-500/10 transition-colors"
                       title="Delete"
                     >
                       <Trash2 size={14} />
@@ -214,28 +214,28 @@ export function CommentsPanel({ documentId, onClose }: CommentsProps) {
               </div>
 
               {/* Comment body */}
-              <p className="text-sm text-gray-700 mb-2 leading-relaxed">{comment.content}</p>
+              <p className="text-sm text-ink-muted mb-2 leading-relaxed">{comment.content}</p>
 
               {/* Quoted text if anchored */}
               {comment.range_json?.text && (
-                <div className="text-xs bg-amber-50 border-l-2 border-amber-300 px-2 py-1 mb-2 text-amber-800 italic rounded-r">
+                <div className="text-xs bg-amber-500/10 border-l-2 border-amber-500/40 px-2 py-1 mb-2 text-amber-600 italic rounded-r">
                   "{comment.range_json.text}"
                 </div>
               )}
 
               {/* Replies */}
               {getReplies(comment.id).length > 0 && (
-                <div className="mt-2 space-y-2 pl-3 border-l-2 border-gray-100">
+                <div className="mt-2 space-y-2 pl-3 border-l-2 border-line">
                   {getReplies(comment.id).map((reply) => (
                     <div key={reply.id} className="pt-2">
                       <div className="flex items-center gap-2 mb-1">
                         <Avatar name={reply.user_name} size="sm" />
-                        <span className="text-xs font-medium text-gray-700">{reply.user_name}</span>
-                        <span className="text-xs text-gray-400">
+                        <span className="text-xs font-medium text-ink-muted">{reply.user_name}</span>
+                        <span className="text-xs text-ink-subtle">
                           {formatDistanceToNow(new Date(reply.created_at), { addSuffix: true })}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-600">{reply.content}</p>
+                      <p className="text-sm text-ink-muted">{reply.content}</p>
                     </div>
                   ))}
                 </div>
@@ -248,7 +248,7 @@ export function CommentsPanel({ documentId, onClose }: CommentsProps) {
                     value={replyText}
                     onChange={(e) => setReplyText(e.target.value)}
                     placeholder="Reply…"
-                    className="flex-1 text-sm px-2.5 py-1.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-500"
+                    className="flex-1 text-sm px-2.5 py-1.5 rounded-lg border border-line-strong bg-surface text-ink placeholder:text-ink-subtle focus:outline-none focus:ring-1 focus:ring-brand-500"
                     autoFocus
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' && !e.shiftKey) {
@@ -271,7 +271,7 @@ export function CommentsPanel({ documentId, onClose }: CommentsProps) {
               ) : (
                 <button
                   onClick={() => setReplyTo(comment.id)}
-                  className="flex items-center gap-1 text-xs text-gray-400 hover:text-brand-500 mt-1 transition-colors"
+                  className="flex items-center gap-1 text-xs text-ink-subtle hover:text-brand-400 mt-1 transition-colors"
                 >
                   <CornerDownRight size={12} /> Reply
                 </button>
@@ -285,13 +285,13 @@ export function CommentsPanel({ documentId, onClose }: CommentsProps) {
       {/* New comment input */}
       <form
         onSubmit={handleSubmitComment}
-        className="border-t border-gray-200 bg-white p-3 flex gap-2"
+        className="border-t border-line bg-surface p-3 flex gap-2"
       >
         <input
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="Add a comment…"
-          className="flex-1 text-sm px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500"
+          className="flex-1 text-sm px-3 py-2 rounded-lg border border-line-strong bg-surface text-ink placeholder:text-ink-subtle focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500"
           id="new-comment-input"
         />
         <Button

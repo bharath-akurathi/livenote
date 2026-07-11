@@ -38,16 +38,16 @@ export function Modal({ open, onClose, title, children, size = 'md' }: ModalProp
     >
       <div
         className={clsx(
-          'w-full mx-4 bg-white rounded-2xl shadow-2xl animate-slide-up',
+          'w-full mx-4 bg-surface rounded-2xl shadow-2xl border border-line animate-slide-up',
           sizes[size]
         )}
       >
         {title && (
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-            <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+          <div className="flex items-center justify-between px-6 py-4 border-b border-line">
+            <h2 className="text-lg font-semibold text-ink">{title}</h2>
             <button
               onClick={onClose}
-              className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+              className="p-1 rounded-lg text-ink-subtle hover:text-ink hover:bg-surface-muted transition-colors"
             >
               <X size={18} />
             </button>

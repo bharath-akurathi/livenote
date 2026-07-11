@@ -100,7 +100,7 @@ export function ShareDialog({ documentId, isPublic, isOwner, onClose }: ShareDia
           <select
             value={role}
             onChange={(e) => setRole(e.target.value as typeof role)}
-            className="px-3 py-2 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+            className="px-3 py-2 rounded-lg border border-line-strong text-sm bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-brand-500/30"
             id="share-role-select"
           >
             <option value="viewer">Viewer</option>
@@ -115,31 +115,31 @@ export function ShareDialog({ documentId, isPublic, isOwner, onClose }: ShareDia
 
       {/* Collaborators list */}
       <div className="space-y-2 mb-6">
-        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+        <p className="text-xs font-semibold text-ink-subtle uppercase tracking-wider">
           People with access
         </p>
         {loading ? (
-          <p className="text-sm text-gray-500 py-4 text-center">Loading…</p>
+          <p className="text-sm text-ink-muted py-4 text-center">Loading…</p>
         ) : collaborators.length === 0 ? (
-          <p className="text-sm text-gray-500 py-4 text-center">No collaborators yet</p>
+          <p className="text-sm text-ink-muted py-4 text-center">No collaborators yet</p>
         ) : (
           collaborators.map((c) => (
             <div key={c.id} className="flex items-center justify-between py-2">
               <div className="flex items-center gap-3">
                 <Avatar name={c.name} size="sm" />
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{c.name}</p>
-                  <p className="text-xs text-gray-500">{c.email}</p>
+                  <p className="text-sm font-medium text-ink">{c.name}</p>
+                  <p className="text-xs text-ink-muted">{c.email}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 capitalize">
+                <span className="text-xs px-2 py-0.5 rounded-full bg-surface-strong text-ink-muted capitalize">
                   {c.role}
                 </span>
                 {isOwner && (
                   <button
                     onClick={() => handleRemove(c.id, c.name)}
-                    className="p-1 rounded text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+                    className="p-1 rounded text-ink-subtle hover:text-red-500 hover:bg-red-500/10 transition-colors"
                     title="Remove"
                   >
                     <Trash2 size={14} />
@@ -152,19 +152,19 @@ export function ShareDialog({ documentId, isPublic, isOwner, onClose }: ShareDia
       </div>
 
       {/* Link sharing */}
-      <div className="border-t border-gray-100 pt-4">
+      <div className="border-t border-line pt-4">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             {publicState ? (
               <Globe size={16} className="text-brand-500" />
             ) : (
-              <Lock size={16} className="text-gray-400" />
+              <Lock size={16} className="text-ink-subtle" />
             )}
             <div>
-              <p className="text-sm font-medium text-gray-900">
+              <p className="text-sm font-medium text-ink">
                 {publicState ? 'Anyone with the link' : 'Restricted'}
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-ink-muted">
                 {publicState ? 'Can view this document' : 'Only people with access'}
               </p>
             </div>

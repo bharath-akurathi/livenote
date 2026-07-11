@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Design tokens (semantic theme variables) ─────────────────────────────── */
+/* Light is the default; `.dark` on <html> flips every token. Components use    */
+/* semantic Tailwind colors (canvas / surface / line / ink) that resolve to     */
+/* these variables, so no per-component dark: variants are needed for surfaces.  */
+:root {
+  color-scheme: light;
+
+  --c-canvas: 248 250 252;        /* slate-50  — app/page background */
+  --c-surface: 255 255 255;       /* white     — cards, modals, headers */
+  --c-surface-muted: 241 245 249; /* slate-100 — hover / nested surfaces */
+  --c-surface-strong: 226 232 240;/* slate-200 — stronger hover */
+  --c-line: 226 232 240;          /* slate-200 — default borders */
+  --c-line-strong: 203 213 225;   /* slate-300 — input borders */
+  --c-ink: 15 23 42;              /* slate-900 — primary text */
+  --c-ink-muted: 100 116 139;     /* slate-500 — secondary text */
+  --c-ink-subtle: 148 163 184;    /* slate-400 — tertiary text */
+}
+
+.dark {
+  color-scheme: dark;
+
+  --c-canvas: 2 6 23;             /* slate-950 */
+  --c-surface: 15 23 42;          /* slate-900 */
+  --c-surface-muted: 30 41 59;    /* slate-800 */
+  --c-surface-strong: 51 65 85;   /* slate-700 */
+  --c-line: 30 41 59;             /* slate-800 */
+  --c-line-strong: 51 65 85;      /* slate-700 */
+  --c-ink: 248 250 252;           /* slate-50  */
+  --c-ink-muted: 148 163 184;     /* slate-400 */
+  --c-ink-subtle: 148 163 184;    /* slate-400 */
+}
+
 /* ── Base ──────────────────────────────────────────────────────────────────── */
 * {
   box-sizing: border-box;
@@ -11,8 +43,8 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f8fafc;
-  color: #1e293b;
+  background-color: rgb(var(--c-canvas));
+  color: rgb(var(--c-ink));
 }
 
 /* ── Scrollbar ─────────────────────────────────────────────────────────────── */
@@ -24,11 +56,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: rgb(var(--c-line-strong));
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: rgb(var(--c-ink-subtle));
 }
 
 /* ── Collaboration cursors ─────────────────────────────────────────────────── */
@@ -63,6 +95,7 @@ body {
   outline: none;
   min-height: 70vh;
   padding: 1.5rem 1rem;
+  color: rgb(var(--c-ink));
 }
 @media (min-width: 640px) {
   .tiptap {
@@ -73,7 +106,7 @@ body {
 .tiptap p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
-  color: #94a3b8;
+  color: rgb(var(--c-ink-subtle));
   pointer-events: none;
   height: 0;
   font-style: italic;
@@ -89,10 +122,10 @@ body {
 .tiptap li { margin: 0.2em 0; }
 
 .tiptap blockquote {
-  border-left: 4px solid #e2e8f0;
+  border-left: 4px solid rgb(var(--c-line-strong));
   padding-left: 1rem;
   margin: 1em 0;
-  color: #64748b;
+  color: rgb(var(--c-ink-muted));
   font-style: italic;
 }
 
@@ -108,7 +141,7 @@ body {
 }
 
 .tiptap code {
-  background: #f1f5f9;
+  background: rgb(var(--c-surface-muted));
   color: #e11d48;
   padding: 0.15em 0.4em;
   border-radius: 4px;
@@ -125,7 +158,7 @@ body {
 
 .tiptap hr {
   border: none;
-  border-top: 2px solid #e2e8f0;
+  border-top: 2px solid rgb(var(--c-line-strong));
   margin: 2em 0;
 }
 
@@ -143,6 +176,18 @@ body {
   background-color: #fef08a;
   padding: 0.1em 0.2em;
   border-radius: 2px;
+}
+
+/* Dark-mode editor tweaks (the variables above already flip the base text/bg) */
+.dark .tiptap code {
+  background: rgb(var(--c-surface-strong));
+  color: #fda4af; /* rose-300 — keeps inline code legible on dark */
+}
+.dark .tiptap a {
+  color: #60a5fa; /* brand-400 */
+}
+.dark .tiptap a:hover {
+  color: #93c5fd; /* brand-300 */
 }
 
 /* ── Slash command menu ────────────────────────────────────────────────────── */
@@ -188,4 +233,24 @@ body {
 .slash-menu-item.is-selected .slash-menu-item-icon {
   background: #e2e8f0;
   color: #334155;
+}
+
+/* Dark-mode slash menu */
+.dark .slash-menu {
+  background: rgb(var(--c-surface));
+  border-color: rgb(var(--c-line));
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5), 0 4px 6px -2px rgba(0,0,0,0.4);
+}
+.dark .slash-menu-item:hover,
+.dark .slash-menu-item.is-selected {
+  background: rgb(var(--c-surface-muted));
+}
+.dark .slash-menu-item-icon {
+  background: rgb(var(--c-surface-muted));
+  color: rgb(var(--c-ink-muted));
+}
+.dark .slash-menu-item:hover .slash-menu-item-icon,
+.dark .slash-menu-item.is-selected .slash-menu-item-icon {
+  background: rgb(var(--c-surface-strong));
+  color: rgb(var(--c-ink));
 }

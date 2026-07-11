@@ -25,7 +25,7 @@ function Btn({ icon, label, active, disabled, onClick }: ToolbarButton) {
       onClick={onClick}
       className={clsx(
         'p-1.5 rounded-md transition-all duration-100',
-        active ? 'bg-brand-100 text-brand-700 shadow-sm' : 'hover:bg-gray-100 text-gray-600',
+        active ? 'bg-brand-100 text-brand-700 shadow-sm' : 'hover:bg-surface-muted text-ink-muted',
         disabled && 'opacity-30 cursor-not-allowed'
       )}
     >
@@ -35,7 +35,7 @@ function Btn({ icon, label, active, disabled, onClick }: ToolbarButton) {
 }
 
 function Sep() {
-  return <div className="w-px h-5 bg-gray-200 mx-1" />;
+  return <div className="w-px h-5 bg-line mx-1" />;
 }
 
 export function Toolbar({ editor }: Props) {
@@ -52,7 +52,7 @@ export function Toolbar({ editor }: Props) {
   };
 
   return (
-    <div className="flex items-center flex-wrap gap-0.5 px-3 py-2 border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+    <div className="flex items-center flex-wrap gap-0.5 px-3 py-2 border-b border-line bg-surface/80 backdrop-blur-sm sticky top-0 z-10">
       {/* History */}
       <Btn icon={<Undo2 size={sz} />} label="Undo"
         disabled={!editor.can().undo()}
@@ -64,7 +64,7 @@ export function Toolbar({ editor }: Props) {
 
       {/* Font Size */}
       <select
-        className="text-sm border border-gray-200 rounded-md py-1 px-2 bg-white text-gray-700 outline-none focus:ring-1 focus:ring-brand-500 cursor-pointer"
+        className="text-sm border border-line rounded-md py-1 px-2 bg-surface text-ink outline-none focus:ring-1 focus:ring-brand-500 cursor-pointer"
         onChange={(e) => {
           if (e.target.value === 'default') {
             editor.chain().focus().unsetFontSize().run();

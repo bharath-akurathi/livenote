@@ -53,18 +53,18 @@ export function VersionPanel({ documentId, onClose }: VersionPanelProps) {
       initialWidth={320} 
       minWidth={250} 
       maxWidth={500}
-      className="border-l border-gray-200 bg-gray-50 h-full animate-slide-in-right"
+      className="border-l border-line bg-surface h-full animate-slide-in-right"
       side="left"
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white">
-        <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-line bg-surface">
+        <h3 className="text-sm font-semibold text-ink flex items-center gap-2">
           <Clock size={16} />
           Version history
         </h3>
         <button
           onClick={onClose}
-          className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+          className="p-1 rounded-lg text-ink-subtle hover:text-ink hover:bg-surface-muted transition-colors"
         >
           <X size={16} />
         </button>
@@ -78,15 +78,15 @@ export function VersionPanel({ documentId, onClose }: VersionPanelProps) {
           </div>
         ) : versions.length === 0 ? (
           <div className="text-center py-8">
-            <Clock size={24} className="mx-auto text-gray-300 mb-2" />
-            <p className="text-sm text-gray-500">No versions yet</p>
-            <p className="text-xs text-gray-400 mt-1">Versions are created automatically as you edit</p>
+            <Clock size={24} className="mx-auto text-ink-subtle mb-2" />
+            <p className="text-sm text-ink-muted">No versions yet</p>
+            <p className="text-xs text-ink-subtle mt-1">Versions are created automatically as you edit</p>
           </div>
         ) : (
           versions.map((ver) => (
             <div
               key={ver.id}
-              className="bg-white rounded-lg border border-gray-200 p-3 hover:border-brand-200 transition-colors group"
+              className="bg-surface-muted rounded-lg border border-line p-3 hover:border-brand-400 transition-colors group"
             >
               <div className="flex items-start justify-between mb-1">
                 <div className="flex items-center gap-1.5">
@@ -95,17 +95,17 @@ export function VersionPanel({ documentId, onClose }: VersionPanelProps) {
                   ) : (
                     <Tag size={12} className="text-brand-500" />
                   )}
-                  <span className="text-sm font-medium text-gray-900 truncate">
+                  <span className="text-sm font-medium text-ink truncate">
                     {ver.label || (ver.auto ? 'Auto-save' : 'Manual save')}
                   </span>
                 </div>
               </div>
 
-              <div className="text-xs text-gray-500 mb-2 space-y-0.5">
+              <div className="text-xs text-ink-muted mb-2 space-y-0.5">
                 <p>{format(new Date(ver.created_at), 'MMM d, yyyy h:mm a')}</p>
                 <p>{formatDistanceToNow(new Date(ver.created_at), { addSuffix: true })}</p>
                 {ver.created_by_name && (
-                  <p className="text-gray-400">by {ver.created_by_name}</p>
+                  <p className="text-ink-subtle">by {ver.created_by_name}</p>
                 )}
               </div>
 

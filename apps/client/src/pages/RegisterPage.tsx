@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
+import { ThemeToggle } from '../components/ThemeToggle';
 import { Button } from '../components/UI/Button';
 import { Input } from '../components/UI/Input';
 import { FileText, ArrowLeft } from 'lucide-react';
@@ -34,7 +35,7 @@ export function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-canvas">
       {/* Left side — branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-700 items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -54,20 +55,23 @@ export function RegisterPage() {
 
       {/* Right side — form */}
       <div className="flex-1 flex items-center justify-center px-6 py-12 relative">
-        <Link to="/" className="absolute top-6 left-6 p-2 text-gray-400 hover:text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2">
+        <Link to="/" className="absolute top-6 left-6 p-2 text-ink-subtle hover:text-ink bg-surface-muted hover:bg-surface-strong rounded-lg transition-colors flex items-center gap-2">
           <ArrowLeft size={18} />
           <span className="text-sm font-medium hidden sm:inline">Back to home</span>
         </Link>
+        <div className="absolute top-6 right-6">
+          <ThemeToggle />
+        </div>
         <div className="w-full max-w-md">
           <div className="lg:hidden flex items-center gap-3 mb-8">
             <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center">
               <FileText size={22} className="text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">LiveNote</span>
+            <span className="text-xl font-bold text-ink">LiveNote</span>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mb-1">Create an account</h2>
-          <p className="text-gray-500 mb-8">Get started with collaborative editing</p>
+          <h2 className="text-2xl font-bold text-ink mb-1">Create an account</h2>
+          <p className="text-ink-muted mb-8">Get started with collaborative editing</p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
@@ -104,7 +108,7 @@ export function RegisterPage() {
             </Button>
           </form>
 
-          <p className="text-center text-sm text-gray-500 mt-6">
+          <p className="text-center text-sm text-ink-muted mt-6">
             Already have an account?{' '}
             <Link to="/login" className="text-brand-500 font-medium hover:text-brand-600">
               Sign in

@@ -9,6 +9,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <title>LiveNote</title>
+    <!-- Prevent flash of wrong theme: resolve + apply theme before first paint -->
+    <script>
+      (function () {
+        try {
+          var match = document.cookie.match(/(?:^|;\s*)theme=([^;]+)/);
+          var theme = match ? match[1] : null;
+          if (theme !== 'light' && theme !== 'dark') {
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.cookie = 'theme=' + theme + '; path=/; max-age=31536000; samesite=lax';
+          }
+          var root = document.documentElement;
+          root.classList.toggle('dark', theme === 'dark');
+          root.style.colorScheme = theme;
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

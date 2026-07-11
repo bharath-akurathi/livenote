@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -11,6 +12,23 @@ export default {
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       colors: {
+        // ── Semantic design tokens (driven by CSS variables in index.css) ──
+        // Surfaces, borders, and text all swap automatically with `.dark`.
+        canvas: 'rgb(var(--c-canvas) / <alpha-value>)',
+        surface: {
+          DEFAULT: 'rgb(var(--c-surface) / <alpha-value>)',
+          muted: 'rgb(var(--c-surface-muted) / <alpha-value>)',
+          strong: 'rgb(var(--c-surface-strong) / <alpha-value>)',
+        },
+        line: {
+          DEFAULT: 'rgb(var(--c-line) / <alpha-value>)',
+          strong: 'rgb(var(--c-line-strong) / <alpha-value>)',
+        },
+        ink: {
+          DEFAULT: 'rgb(var(--c-ink) / <alpha-value>)',
+          muted: 'rgb(var(--c-ink-muted) / <alpha-value>)',
+          subtle: 'rgb(var(--c-ink-subtle) / <alpha-value>)',
+        },
         brand: {
           50: '#eff6ff',
           100: '#dbeafe',

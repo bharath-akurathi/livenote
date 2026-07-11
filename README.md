@@ -81,6 +81,14 @@ Built with **Yjs CRDTs** for conflict-free merging, **Hocuspocus v4** as the Web
 - Threaded replies
 - Resolve / Unresolve
 
+### 🌓 Dark Mode
+- **Light / Dark toggle** available in the navbar and the app header (landing, dashboard, and document pages).
+- **Remembers your choice** in a cookie, so it persists across page reloads and browser sessions.
+- **No flash of wrong theme (FOUC)** — an inline script in `index.html` applies the saved (or OS) theme to `<html>` before first paint.
+- **Respects system preference** — on a first visit it defaults to `prefers-color-scheme` and saves that choice.
+- **Semantic design tokens** — colors are driven by CSS variables (`canvas`, `surface`, `line`, and `ink` scales) mapped into Tailwind, so the entire UI adapts consistently with no per-component duplication.
+- **Accessible** — maintains legible contrast and readable typography in both themes.
+
 ---
 
 ## 🏗️ Architecture
@@ -134,7 +142,7 @@ Built with **Yjs CRDTs** for conflict-free merging, **Hocuspocus v4** as the Web
 | WS Client | `@hocuspocus/provider` | Auth hooks, reconnect, awareness |
 | Offline | `y-indexeddb` | Browser-local Y.Doc cache |
 | State | Zustand | Minimal, no boilerplate |
-| Styling | TailwindCSS | Utility-first |
+| Styling | TailwindCSS | Utility-first; dark mode via CSS-variable design tokens |
 | HTTP | Axios | Interceptors for token refresh |
 | Routing | React Router v6 | |
 

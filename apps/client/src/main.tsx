@@ -15,8 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           duration: 3000,
           style: {
             borderRadius: '10px',
-            background: '#1e293b',
-            color: '#f8fafc',
+            background: 'rgb(var(--c-surface))',
+            color: 'rgb(var(--c-ink))',
+            border: '1px solid rgb(var(--c-line))',
             fontSize: '14px',
           },
         }}

@@ -22,7 +22,7 @@ import type * as Y from 'yjs';
 import { Toolbar } from './Toolbar';
 import { useUIStore } from '../../stores/uiStore';
 import type { AwarenessUser } from '../../types';
-import { Bold, Italic, Underline, Code, Link2, X } from 'lucide-react';
+import { Bold, Italic, Underline, Code, Link2, X, Users } from 'lucide-react';
 import { clsx } from 'clsx';
 import { Avatar } from '../UI/Avatar';
 import { ResizableSidebar } from '../UI/ResizableSidebar';
@@ -121,7 +121,7 @@ export function CollabEditor({
           </BubbleMenu>
         )}
 
-        <div className="bg-white min-h-[70vh]">
+        <div className="bg-surface min-h-[70vh]">
           <EditorContent editor={editor} />
         </div>
 
@@ -131,29 +131,42 @@ export function CollabEditor({
 
       {/* Presence sidebar */}
       {presenceSidebarOpen && awarenessUsers.size > 0 && (
-        <ResizableSidebar 
-          initialWidth={200}
-          minWidth={150}
-          maxWidth={350}
-          className="pl-4 pt-4 pr-2 border-l border-gray-100 bg-white"
+        <ResizableSidebar
+          initialWidth={210}
+          minWidth={170}
+          maxWidth={320}
+          className="pl-4 pt-4 pb-4 pr-3 border-l border-line bg-surface"
           side="left"
         >
-          <div className="flex items-center justify-between mb-3 pr-2">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
-              Editing now
-            </p>
-            <button 
+          <div className="flex items-center justify-between mb-3 pr-1">
+            <div className="flex items-center gap-2">
+              <Users size={14} className="text-ink-subtle" />
+              <p className="text-xs font-semibold text-ink-subtle uppercase tracking-wider">
+                Editing now
+              </p>
+              <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-500/10 px-1.5 py-0.5 rounded-full">
+                {awarenessUsers.size}
+              </span>
+            </div>
+            <button
               onClick={() => useUIStore.getState().setPresenceSidebarOpen(false)}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Close presence panel"
+              className="p-1 rounded-md text-ink-subtle hover:text-ink hover:bg-surface-muted transition-colors"
             >
               <X size={14} />
             </button>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             {Array.from(awarenessUsers.values()).map((u, i) => (
-              <div key={i} className="flex items-center gap-2.5 animate-fade-in">
-                <Avatar name={u.name} color={u.color} size="sm" />
-                <span className="text-sm text-gray-600 truncate">{u.name}</span>
+              <div
+                key={i}
+                className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-surface-muted animate-fade-in transition-colors"
+              >
+                <span className="relative inline-flex flex-shrink-0">
+                  <Avatar name={u.name} color={u.color} size="sm" />
+                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-surface" />
+                </span>
+                <span className="text-sm text-ink-muted truncate">{u.name}</span>
               </div>
             ))}
           </div>
