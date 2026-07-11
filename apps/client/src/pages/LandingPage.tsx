@@ -245,10 +245,11 @@ export function LandingPage() {
             {/* Video */}
             <div className="aspect-video w-full bg-black">
               <iframe
-                src="https://drive.google.com/file/d/1_FDz-8-TCxXdwSYIQWxq8qMRF2t6o57O/preview"
-                title="LiveNote demo"
                 className="w-full h-full"
-                allow="autoplay; encrypted-media; picture-in-picture"
+                src="https://www.youtube.com/embed/j1TW-gFOMZI?autoplay=1&mute=1"
+                title="LiveNote demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
             </div>
